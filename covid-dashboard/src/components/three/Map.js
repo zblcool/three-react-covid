@@ -113,19 +113,40 @@ class Map extends Component {
     // scene.add(newLight)
     // CreateLights is a function which creates the lights and adds them to the scene.
     function createLights(scene){
-        lights[0] = new THREE.PointLight("#004d99", 1, 0);
-        lights[1] = new THREE.PointLight("#004d99", 1, 0);
-        lights[2] = new THREE.PointLight("#004d99", 1,0);
+        lights[0] = new THREE.PointLight("#004d99", .1, 0);
+        lights[1] = new THREE.PointLight("#004d99", .1, 0);
+        lights[2] = new THREE.PointLight("#004d99", .1,0);
         lights[3] = new THREE.AmbientLight('#ffffff');
+        lights[4] = new THREE.PointLight("#004d99", 1,0)
     
         lights[0].position.set(200, 0, -400);
         lights[1].position.set(200, 200, 400);
         lights[2].position.set(-200, -200, -50);
-    
+        lights[4].position.set(-200.-100,-100)
+        let spotLight;
+        spotLight = new THREE.SpotLight( 0xffffff, 1 );
+        spotLight.position.set( -50, 0, 35 );
+        spotLight.angle = Math.PI / 4;
+        spotLight.penumbra = 0.5;
+        spotLight.decay = 3;
+        spotLight.distance = 300;
+
+        spotLight.castShadow = true;
+        spotLight.shadow.mapSize.width = 512;
+        spotLight.shadow.mapSize.height = 512;
+        spotLight.shadow.camera.near = 10;
+        spotLight.shadow.camera.far = 200;
+        spotLight.shadow.focus = 1;
+        scene.add( spotLight );
+
+
+
+
         scene.add(lights[0]);
         scene.add(lights[1]);
         scene.add(lights[2]);
         scene.add(lights[3]);
+        scene.add(lights[4]);
     }
     
     function addSceneObjects(scene) {
@@ -162,8 +183,8 @@ class Map extends Component {
         }
     };
     
-    let instructionClicker = document.getElementById("instructions");
-    instructionClicker.addEventListener("click", hideInstructions, false);
+    // let instructionClicker = document.getElementById("instructions");
+    // instructionClicker.addEventListener("click", hideInstructions, false);
     
     // Resizes the window when it changes
     function onWindowResize() {
@@ -181,9 +202,15 @@ class Map extends Component {
         render();
         controls.update();
     };
-    
+
     // Updates camera renderer
     function render() {
+        // camera.position.x += (  camera.position.x ) * 0.05;
+        // camera.position.y += (  camera.position.y ) * 0.05;
+        // camera.lookAt( scene.position );
+     
+        earth.rotation.y -= 0.0005;
+        earth.rotation.x -= 0.0001;
         renderer.render( scene, camera );
     };
     
@@ -201,9 +228,16 @@ class Map extends Component {
 
     // Create and add coordinates for the globe
     function addCountryCoord(earth, country, language, latitude, longitude, color, region, population, area_sq_mi, gdp_per_capita, climate){
-        let pointOfInterest = new THREE.SphereGeometry(.1, 32, 32);
+        let populationRate = population/50000000
+        let pointOfInterest ;
+        if (populationRate > 3) {
+            pointOfInterest = new THREE.BoxGeometry(.5, populationRate/4, .5)
+        }else{
+            pointOfInterest = new THREE.BoxGeometry(.1, populationRate, .1)
+        }
         let lat = latitude * (Math.PI/180);
         let lon = -longitude * (Math.PI/180);
+        console.log('add coord');
         const radius = 10;
         const phi = (90-lat)*(Math.PI/180);
         const theta = (lon+180)*(Math.PI/180);
@@ -248,7 +282,7 @@ class Map extends Component {
         document.querySelector("#instruction-box").style.display = "none";
         document.getElementById("title-box").style.display = "none";
         document.getElementById("info-box").style.display = "flex";
-    
+        console.log('hi',data);
         removeChildren();
     
         // Get the data from the JSON file

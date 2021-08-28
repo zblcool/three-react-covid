@@ -14,11 +14,11 @@ function MapContainer() {
     }
     )
       .then(function(response){
-        console.log(response)
+        // console.log(response)
         return response.json();
       })
       .then(function(myJson) {
-        console.log(myJson);
+        // console.log(myJson);
         setData(myJson)
       });
   }
@@ -30,7 +30,7 @@ function MapContainer() {
      {
        data && data.length>0 && data.map((item)=><p>{item.about}</p>)
      }
-     <Map data = {data}></Map>
+     { data && data.length>0 && <Map data = {data}></Map>}
     </div>
   );
 }
