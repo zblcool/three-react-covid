@@ -28,7 +28,7 @@ function MapContainer() {
   return (
     <div className="App">
      {
-       data && data.length>0 && data.map((item)=><p>{item.about}</p>)
+       data && data.length>0 && data.map((item,i)=><p key={i}>{item.about}</p>)
      }
      { data && data.length>0 && <Map data = {data}></Map>}
     </div>

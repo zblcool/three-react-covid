@@ -273,15 +273,12 @@ class Map extends Component {
     };
     
     // Variables to get information and change accordingly
-    let countryInfo = document.getElementById("country");
-    countryInfo.addEventListener("click", changeToCountry);
+    // let countryInfo = document.getElementById("country");
+    // countryInfo.addEventListener("click", changeToCountry);
     
     // Changes the information so data points can be seen
     function changeToCountry() {
         // Show/hide needed and unneeded elements
-        document.querySelector("#instruction-box").style.display = "none";
-        document.getElementById("title-box").style.display = "none";
-        document.getElementById("info-box").style.display = "flex";
         console.log('hi',data);
         removeChildren();
     
