@@ -28,7 +28,6 @@ class Map extends Component {
     
     // CREATE renderer to display the created objects (kind of like the people who place the diferent sets on the stage)
     const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
    
     renderer.setSize(threeContainer.clientWidth, threeContainer.clientHeight);
     threeContainer.appendChild(renderer.domElement);
@@ -171,7 +170,7 @@ class Map extends Component {
     controls.saveState();
     
     // Add event listeners so DOM knows what functions to use when objects/items are interacted with
-    // window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener('resize', onWindowResize, false);
 
     //window.addEventListener('touchstart', onTouch, false);
     
@@ -190,11 +189,11 @@ class Map extends Component {
     // instructionClicker.addEventListener("click", hideInstructions, false);
     
     // Resizes the window when it changes
-    // function onWindowResize() {
-    //     camera.aspect = window.innerWidth / window.innerHeight;
-    //     camera.updateProjectionMatrix();
-    //     renderer.setSize(window.innerWidth, window.innerHeight);
-    // };
+    function onWindowResize() {
+        camera.aspect = threeContainer.clientWidth / threeContainer.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(threeContainer.clientWidth,threeContainer.clientHeight);
+    };
     
     // Listens for the mouse to intersect object and when clicked returns the data to the inner html
 

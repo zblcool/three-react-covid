@@ -39,6 +39,7 @@ const BarChart = () => {
 
   const config = {
     data,
+    height:300,
     xField: 'type',
     yField: 'sales',
     label: {

@@ -16,7 +16,7 @@ const DataVisualization = () => {
 
   const config = {
     data,
-    height: 400,
+    height: 300,
     width:200,
     xField: 'year',
     yField: 'value',
