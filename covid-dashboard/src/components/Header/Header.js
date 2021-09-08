@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown, NavItem } from "react-bootstrap";
 import logoPng from '../../public/img/covid-logo.png'
+import {  Link } from "react-router-dom";
 class Header extends Component {
   state = {
     loading: true,
@@ -36,18 +37,22 @@ class Header extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" style={{fontWeight:600}}>
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#global">Global</Nav.Link>
-              <Nav.Link href="#lastWeek">Last Week</Nav.Link>
+              
+              <Link to="/" className="nav-link">Home</Link>
+                
+              
+              <Link to="/global" className="nav-link">Global</Link>
+              
+              
+              <Link to="/lastWeek" className="nav-link">Last Week</Link>
+              
               <NavDropdown title="About" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
-                  The Author
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  The Project
-                </NavDropdown.Item>
+   
+                <Link to="/about" className="dropdown-item"> The Author</Link>
+                <Link to="/aboutProject" className="dropdown-item">The Project</Link>
+
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Github</NavDropdown.Item>
+                <NavDropdown.Item href="https://ashzhang.xyz">Blog</NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Nav>

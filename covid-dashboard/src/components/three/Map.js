@@ -22,15 +22,18 @@ class Map extends Component {
     
     // CREATE scene where objects will be placed (kind of like a stage)
     const scene = new THREE.Scene();
-    
+    const threeContainer = document.getElementById("three-root")
     // CREATE camera to see objects (kind of like sitting in the audience)
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, threeContainer.clientWidth/threeContainer.clientHeight, 0.1, 1000);
     
     // CREATE renderer to display the created objects (kind of like the people who place the diferent sets on the stage)
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+   
+    renderer.setSize(threeContainer.clientWidth, threeContainer.clientHeight);
+    threeContainer.appendChild(renderer.domElement);
     
+
     // CREATE controls so that we can interact with the objects/have interactivity
     const controls = new OrbitControls(camera, renderer.domElement);
     
@@ -168,7 +171,7 @@ class Map extends Component {
     controls.saveState();
     
     // Add event listeners so DOM knows what functions to use when objects/items are interacted with
-    window.addEventListener('resize', onWindowResize, false);
+    // window.addEventListener('resize', onWindowResize, false);
 
     //window.addEventListener('touchstart', onTouch, false);
     
@@ -187,17 +190,18 @@ class Map extends Component {
     // instructionClicker.addEventListener("click", hideInstructions, false);
     
     // Resizes the window when it changes
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    };
+    // function onWindowResize() {
+    //     camera.aspect = window.innerWidth / window.innerHeight;
+    //     camera.updateProjectionMatrix();
+    //     renderer.setSize(window.innerWidth, window.innerHeight);
+    // };
     
     // Listens for the mouse to intersect object and when clicked returns the data to the inner html
 
     
     // Allows for the scene to move and be interacted with
     function animate() {
+        
         requestAnimationFrame( animate );
         render();
         controls.update();

@@ -12,3 +12,20 @@
     flex-direction: row;
     margin-right: 10px;
 }
+.three-container{
+    position: fixed;
+    top: 64px;
+    height: 89vh;
+    // bottom: 30%;
+    width: calc(100vw - 3rem);
+   canvas{
+    border-radius: 40px;
+    background-color: #555;
+    // box-shadow: 0 0 50px 20px #555;
+   }
+}
+
+.three-js-card{
+    height: 89vh;
+    border-radius: 20px;
+}

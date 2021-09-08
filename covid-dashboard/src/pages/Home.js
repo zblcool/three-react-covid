@@ -1,14 +1,12 @@
-
 import Map from "../components/three/Map";
 import MapContainer from "../components/three/MapDataContainer";
-import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import Header from "../components/Header/Header.js";
+import TwoDimensionMap from "../components/TwoDimensionMap"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function Home() {
   return (
-    <div>
-	
-
-	<Header></Header>
+    
+      <div>
+        
 
         {/* 
       <Canvas>
@@ -20,17 +18,21 @@ function Home() {
         </mesh>
       </Canvas>
       */}
-
-        <iframe
-          width="500"
-          height="300"
-          src="https://api.maptiler.com/maps/b0cd528b-f6b4-40a6-a7ec-3ad68ff85365/?key=LLaGF9mARrE3KmfAEcZd#11.2/-33.91679/151.23810"
-        ></iframe>
-        <div id="title-box"></div>
-
-        <MapContainer></MapContainer>
-    
-    </div>
+        <Switch>
+          <Route exact path="/">
+           Welcome
+          </Route>
+          <Route exact path="/global" component={MapContainer}> 
+            
+          </Route>
+          <Route exact path="/lastWeek" component={TwoDimensionMap}>
+ 
+          </Route>
+          <Route exact path="/about">
+            <p>hi</p>
+          </Route>
+        </Switch>
+      </div>
   );
 }
 
