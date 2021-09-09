@@ -16,8 +16,26 @@ const DataVisualization = () => {
 
   const config = {
     data,
-    height: 300,
-    width:200,
+    height: 200,
+    width:100,
+    xAxis: {
+        label:{
+          style:{
+            fill: '#FFFFFF',
+            opacity: 1,
+          }
+          
+        }
+    },
+    yAxis: {
+        label:{
+          style:{
+            fill: '#FFFFFF',
+            opacity: 1,
+          }
+          
+        }
+    },
     xField: 'year',
     yField: 'value',
     point: {

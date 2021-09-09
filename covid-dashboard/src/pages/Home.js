@@ -2,6 +2,7 @@ import Map from "../components/three/Map";
 import MapContainer from "../components/three/MapDataContainer";
 import TwoDimensionMap from "../components/TwoDimensionMap"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
 function Home() {
   return (
     
@@ -20,7 +21,10 @@ function Home() {
       */}
         <Switch>
           <Route exact path="/">
-           Welcome
+          <Card>
+          <h1 className="align-middle"> Home page placeholder under construction</h1>
+          </Card>
+           
           </Route>
           <Route exact path="/global" component={MapContainer}> 
             

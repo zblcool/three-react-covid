@@ -3,6 +3,8 @@ import { Card, Col, Row } from "react-bootstrap";
 import Map from "./Map";
 import DataVisualization from "./DataVisualization";
 import BarChart from "../charts/BarChart";
+import AreaChartCustom from "../charts/AreaChartCustom";
+import PieChartCustom from "../charts/PieChartCustom";
 
 function MapContainer() {
   const [data, setData] = useState([]);
@@ -50,6 +52,17 @@ function MapContainer() {
           <BarChart></BarChart>
           </Col>
         </Row>
+        <Row>
+        <Col md={4}>
+          <AreaChartCustom></AreaChartCustom>
+        </Col>
+        <Col >
+
+        </Col>
+        <Col>
+         <PieChartCustom></PieChartCustom>
+        </Col>
+      </Row>
       </Card.Body>
     </Card>
   );

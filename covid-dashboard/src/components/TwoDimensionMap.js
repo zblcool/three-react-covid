@@ -15,8 +15,8 @@ function TwoDimensionMap() {
         <Col >
         <iframe
         title="map"
-          width="500"
-          height="300"
+          width="900"
+          height="600"
           src="https://api.maptiler.com/maps/b0cd528b-f6b4-40a6-a7ec-3ad68ff85365/?key=LLaGF9mARrE3KmfAEcZd#11.2/-33.91679/151.23810"
         ></iframe>
         </Col>

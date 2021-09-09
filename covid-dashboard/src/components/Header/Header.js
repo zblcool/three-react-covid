@@ -23,7 +23,8 @@ class Header extends Component {
     return (
       <Navbar collapseOnSelect expand="xl" bg="dark" variant="dark" className="px-5">
         
-          <Navbar.Brand href="#home">
+          
+          <Link to="/" className="navbar-brand">
             <img
               alt=""
               src={logoPng}
@@ -32,8 +33,8 @@ class Header extends Component {
               style={{borderRadius:15+'px'}}
               className="d-inline-block"
             />{" "}
-             
-          </Navbar.Brand>
+            </Link>
+          
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" style={{fontWeight:600}}>
             <Nav className="me-auto">
