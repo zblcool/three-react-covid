@@ -20,14 +20,14 @@ function Home() {
       </Canvas>
       */}
         <Switch>
-          <Route exact path="/">
-          <Card>
-          <h1 className="align-middle"> Home page placeholder under construction</h1>
-          </Card>
+          <Route exact path="/" component={MapContainer}>
+      
            
           </Route>
-          <Route exact path="/global" component={MapContainer}> 
-            
+          <Route exact path="/global"> 
+          <Card>
+          <h1 className="align-middle"> Under construction</h1>
+          </Card>
           </Route>
           <Route exact path="/lastWeek" component={TwoDimensionMap}>
  

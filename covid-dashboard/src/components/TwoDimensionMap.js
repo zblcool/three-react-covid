@@ -7,7 +7,7 @@ function TwoDimensionMap() {
   return (
     <Card className="my-3 mx-4 text-white bg-dark three-js-card" >
     <Card.Header>
-    Dashboard
+    Heatmap ( under construction)
     </Card.Header>
     <Card.Body>
       <Card.Title> </Card.Title>
