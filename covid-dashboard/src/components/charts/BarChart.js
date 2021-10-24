@@ -4,36 +4,44 @@ import { Column } from '@ant-design/charts';
 const BarChart = () => {
   const data = [
     {
-      type: 'cat1',
-      sales: 38,
+      type: '0-9',
+      fatalities: 0,
     },
     {
-      type: 'cat2',
-      sales: 52,
+      type: '10-19',
+      fatalities: 1,
     },
     {
-      type: 'cat3',     
-       sales: 0,
+      type: '20-29',     
+       fatalities: 6,
     },
     {
-      type: 'cat4',     
-      sales: 145,
+      type: '30-39',     
+      fatalities: 10,
     },
     {
-      type: 'cat5',
-      sales: 48,
+      type: '40-49',
+      fatalities: 22,
     },
     {
-      type: 'cat6',
-      sales: 38,
+      type: '50-59',
+      fatalities: 57,
     },
     {
-      type: 'cat7',
-      sales: 38,
+      type: '60-69',
+      fatalities: 90,
     },
     {
-      type: 'cat8',
-      sales: 38,
+      type: '70-79',
+      fatalities: 133,
+    },
+    {
+      type: '80-89',
+      fatalities: 163,
+    },
+    {
+      type: '90+',
+      facilities: 71,
     },
   ];
 
@@ -59,7 +67,7 @@ const BarChart = () => {
           
         }
     },
-    yField: 'sales',
+    yField: 'fatalities',
     theme: {
         colors10: [
           '#FF6B3B',
@@ -94,7 +102,7 @@ const BarChart = () => {
       },
     meta: {
       type: { alias: 'Category' },
-      sales: { alias: 'Sales' },
+      fatalities: { alias: 'Fatalities' },
     },
   };
 

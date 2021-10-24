@@ -3,15 +3,16 @@ import { Line } from '@ant-design/charts';
 
 const DataVisualization = () => {
   const data = [
-    { year: '1991', value: 3 },
-    { year: '1992', value: 4 },
-    { year: '1993', value: 3.5 },
-    { year: '1994', value: 5 },
-    { year: '1995', value: 4.9 },
-    { year: '1996', value: 6 },
-    { year: '1997', value: 7 },
-    { year: '1998', value: 9 },
-    { year: '1999', value: 13 },
+    { year: 'Jan', value: 28460 },
+    { year: 'Feb', value: 28806 },
+    { year: 'Mar', value: 28975 },
+    { year: 'Apr', value: 29656 },
+    { year: 'May', value: 30083 },
+    { year: 'June', value: 30018 },
+    { year: 'July', value: 30642 },
+    { year: 'Aug', value: 34130 },
+    { year: 'Sep', value: 55090 },
+    { year: 'Oct', value: 105131 },
   ];
 
   const config = {
@@ -25,6 +26,13 @@ const DataVisualization = () => {
             opacity: 1,
           }
           
+        },
+        title:{
+          text:'Total cases in Australia in 2021',
+          style:{
+            fill: '#FFFFFF',
+            opacity: 1,
+          }
         }
     },
     yAxis: {
@@ -38,6 +46,7 @@ const DataVisualization = () => {
     },
     xField: 'year',
     yField: 'value',
+  
     point: {
       size: 5,
       shape: 'diamond',

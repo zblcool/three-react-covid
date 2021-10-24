@@ -25,29 +25,17 @@ const PieChartCustom = () => {
   }
   var data = [
     {
-      type: 'type1',
-      value: 27,
+      type: 'Fully vaccinated',
+      value: 73.1,
     },
     {
-      type: 'type2',
-      value: 25,
-    },
-    {
-      type: 'type3',
-      value: 18,
-    },
-    {
-      type: 'type4',
-      value: 15,
-    },
-    {
-      type: 'type5',
-      value: 10,
-    },
-    {
-      type: 'others',
-      value: 5,
-    },
+      type: 'Only Had first Dose',
+      value: 13.5,
+    },{
+      type:'Others',
+      value:13.4
+    }
+
   ];
   var config = {
     appendPadding: 10,
@@ -85,8 +73,9 @@ const PieChartCustom = () => {
     },
     statistic: {
       title: {
+        text:"Percentage ",
         style:{
-            fill:'white'
+            fill:'#ffffff'
         },
         offsetY: -4,
         customHtml: function customHtml(container, view, datum) {
@@ -105,8 +94,8 @@ const PieChartCustom = () => {
           var _container$getBoundin2 = container.getBoundingClientRect(),
             width = _container$getBoundin2.width;
           var text = datum
-            ? '\xA5 '.concat(datum.value)
-            : '\xA5 '.concat(
+            ? ' '.concat(datum.value)
+            : '  '.concat(
                 data.reduce(function (r, d) {
                   return r + d.value;
                 }, 0),
