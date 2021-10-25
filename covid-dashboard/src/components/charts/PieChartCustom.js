@@ -60,6 +60,7 @@ const PieChartCustom = () => {
         }
     },
     title:{
+        text:"Vaccination rate in Australia",
         style:{
             fill:'white'
         }

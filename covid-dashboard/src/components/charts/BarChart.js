@@ -50,6 +50,13 @@ const BarChart = () => {
     height:300,
     xField: 'type',
     xAxis: {
+      title:{
+        text:"Lives lost by age group",
+        style:{
+          fill: '#FFFFFF',
+          opacity: 1,
+        }
+      },
         label:{
           style:{
             fill: '#FFFFFF',

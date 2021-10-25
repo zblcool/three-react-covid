@@ -235,6 +235,13 @@ const AreaChartCustom = () => {
           opacity: 1,
         },
       },
+      title:{
+        text:'New cases last month in NSW/VIC/QLD',
+        style:{
+          fill: '#FFFFFF',
+          opacity: 1,
+        }
+      }
     },
     yAxis: {
       label: {
