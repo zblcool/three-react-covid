@@ -41,7 +41,7 @@ const BarChart = () => {
     },
     {
       type: '90+',
-      facilities: 71,
+      fatalities: 71,
     },
   ];
 
@@ -51,7 +51,7 @@ const BarChart = () => {
     xField: 'type',
     xAxis: {
       title:{
-        text:"Lives lost by age group",
+        text:"Lives lost by age group in NSW",
         style:{
           fill: '#FFFFFF',
           opacity: 1,

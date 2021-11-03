@@ -1,70 +1,192 @@
-# Getting Started with Create React App
+# Covid-3D online visuliaztion dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a research project for UTS 32933 Research Project.
 
-## Available Scripts
+The App was writen with React and Three.js using 'create-react-app' cli. 
 
-In the project directory, you can run:
+Supervisor: [Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
 
-### `yarn start`
+Student: Baolong Zhang 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Presentation video: https://youtu.be/mVv23h8roH4
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `yarn test`
+## 1. Live Demo
+Here are the links to the live demo of the current version of covid-3D project.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+>    
+> https://covid3d.github.io/
+> 
+> https://three-react-covid.vercel.app/  ( backup )
+>  
+### 1.1 Introduction
 
-### `yarn build`
+The Covid-19 pandemic has impacted the whole world from every dimension and aspects. And regarding to the current policy of the major governments
+This Covid-3D online visualization platform project aims to use 3D and interactive visualizations to create the sense to help general public get the insights about Covid-19.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
+### 1.2 Previews
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- In the center of the webpage. There is a 3D globe. The cuboid objects on the surface is the **Covid confirmed cases in each country**. The location of all the cuboids are base on the `longitude` and `latitude` of their country. And the `height` of cuboid is base on the *number of the cases*. If the cuboid is too high. The width of it will increase to suit the graphics.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This is the code for achieving this effects. Check the rate of how many cases per 500000 people to decide if we need to cut the height.
+```js
+    let casesRate = cases/500000
+    if (casesRate > 3) {
+        pointOfInterest = new THREE.BoxGeometry(.5, casesRate/5, .5)
+    }else{
+        pointOfInterest = new THREE.BoxGeometry(.1, casesRate, .1)
+    }
+```
 
-### `yarn eject`
+![preview](./public/record1.gif)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+On the left hand, there are two graphs. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- The `AreaChart` in bottom left shows the comparision of **new cases in last month between VIC , NSW and QLD**. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- On top left, there is a `lineChart` display the **total cases in Australia in 2021** . 
 
-## Learn More
+- On top right, there is a `bar chart` display the **lives lost in different age groups**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- on bottom right, there is a `ring chart` shows the **vaccination rate in Australia**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![preview](./public/record2.gif)
+![preview](./public/record3.gif)
 
-### Code Splitting
+---
+Below figure shows the indicators the on the bar
+![preview](./public/bigScreenshot.png)
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 2. Getting Started
 
-### Analyzing the Bundle Size
+### 2.1 Intsall
+Once you have download the  existing project, a local react-native binary will be available for you to use. Feel free to use Yarn to call it directly.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+``` js
+// Yarn
+yarn install
+// NPM
+npm install 
+```
+### 2.2 Running
 
-### Making a Progressive Web App
+The React.js projects accept scripts to run the proejct locally. You can use follow scripts for different purpose. If you prefer to use **Yarn**. You can use `yarn start` to run the project in `localhost:3000` which can be access from your browser.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```js
+// dev
+yarn(npm) start 
+// deployment 
+yarn build
+// test
+yarn test
+```
+### 2.3 Deployment
 
-### Advanced Configuration
+In order to deploy the project online. This project offers two options to achieve this. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Github pages
+    After running `yarn build`. A static version of website will be generated in the `build` folder.
 
-### Deployment
+    ![build](./public/build.png)
+    
+    Now you can push the static code into a remote Github Pages repo. And it will be able to display through  `[project-name].github.io`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. Vercel
+   When using vercel. All you need to do is connect the vercel to your GitHub account. When you have push the new commits to the selected branch and configed the automaic deployment commands. Vercel will automaticly deploy the latest version of project.
 
-### `yarn build` fails to minify
+   ![vercel](./public/vercel.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+# 2.Key dependencies 
+
+The key dependencies of these projects is shown below. 
+- The `React` is used to build the basic components and pass the value betwwen each component. 
+- The `React-router-dom` was used to navigate through different pages. 
+- The `Bootstrap` was utiled to create the design of *navigation* and *cards*. 
+- `React-Bootstrap` was used to integrated **React** and **Bootstrap** libraries
+- `Three.js` was take in charge of creating the 3D scenes and objects. Together with the background.
+- `Sass` was used to customize the design for some scenes style.
+- `GeoThree` was utiled to use Geo data in Three.js
+
+----
+
+- React.js  17.0.2
+  - react-router-dom 5.3.0
+- Bootstrap 5.1.0
+  - React-Bootstrap 1.6.1
+- Three.js 0.131.3
+- GeoThree 0.0.10
+- Sass 1.39.0
+
+# 3. File Structure
+The work code is located in `src` folder. Below is the structure of this project. 
+
+The `node_modules` is the dependacies folder that you will have it after run `yarn install` to install the dpendencies.
+
+In `components` folder, there are two types of components 
+Visualizaiton components 
+
+- `map.js` 
+- `AreaChartCustom.js` 
+- `BarChart.js`
+- `PieChartCustom.js` 
+- `DataVisualization.js`
+
+Support components 
+- `MapDataContainer.js`
+
+These support components will handle the data source to provide a buffer to the lower level components.
+
+```
+Project
+│   README.md
+│   package.json   
+│
+│───node_modules // You will see this after run `yarn install`
+│
+│───public
+│          
+└───src
+    │   App.js
+    │   App.scss
+    │   index.js
+    │   User.scss
+    │   ···
+    │───pages
+    │       │   Home.js
+    │        
+    │───components
+    │       │───charts
+    │       │   │   AreaCHartCustom.js
+    │       │   │   BarChart.js
+    │       │   │   PieChartCustom.js
+    │       │     
+    │       │───Header
+    │       │   │   Herader.js
+    │       │      
+    │       │───three
+    │       │   │   DataVisualization.js
+    │       │   │   Map.js
+    │       │   │   MapDataContainer.js
+    │       │   │   
+    │       │   
+    │       │───TwoDimensionMap.js
+    │           
+```
+
+# 4. Futrue works
+
+In the future, I want to integrate the library I used in another project --- `Cesium` into the project to provide the Terrain so you can zoom into details from the outter space.
+
+Below are the Cecium examples I created.
+
+![preview](./public/record4.gif)
+
+![preview](./public/record5.gif)

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Nav, Navbar, NavDropdown, NavItem } from "react-bootstrap";
 import logoPng from '../../public/img/covid-logo.png'
+import logoUTS from './utsLogo2.jpeg'
 import {  Link } from "react-router-dom";
 class Header extends Component {
   state = {
@@ -57,18 +58,10 @@ class Header extends Component {
               </NavDropdown>
             </Nav>
             <Nav>
-              {loading || !person ? (
-                <div>loading..</div>
-              ) : (
-                <Navbar.Text className="user-profile-section">
-                  {person.name.first} {person.name.last}
-                  <img
-                    id="profile-img"
-                    src={person.picture.thumbnail}
-                    alt="userPic"
-                  ></img>
-                </Navbar.Text>
-              )}
+
+              <Navbar.Text className="user-profile-section">
+              <img src={logoUTS} width={30}></img>
+              </Navbar.Text>
             </Nav>
           </Navbar.Collapse>
      

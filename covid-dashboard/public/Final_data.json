@@ -3702,7 +3702,17 @@
       "Population": 60609153,
       "Area_sq_mi": 244820,
       "GPD_per_capita": 27700,
-      "Climate": "3"
+      "Climate": "3",
+       "Cases": 8641225,
+      "CasesPer100000Population": "12729.023",
+      "Cases - newly reported in last 7 days": 323782,
+      "Cases - newly reported in last 7 days per 100000 population": "476.95",
+      "Cases - newly reported in last 24 hours": 51484,
+      "Deaths - cumulative total": 139146,
+      "Deaths - cumulative total per 100000 population": "204.97",
+      "Deaths - newly reported in last 7 days": 909,
+      "Deaths - newly reported in last 7 days per 100000 population": "1.339",
+      "Deaths - newly reported in last 24 hours": 115
     },
     {
       "Country": "United States",

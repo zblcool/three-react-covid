@@ -1,3 +1,4 @@
+import { throwStatement } from "@babel/types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import * as THREE from "three";
@@ -213,7 +214,7 @@ class Map extends Component {
         // camera.lookAt( scene.position );
      
         earth.rotation.y -= 0.0005;
-        earth.rotation.x -= 0.0001;
+        earth.rotation.x += 0.0001;
         renderer.render( scene, camera );
     };
     
@@ -227,18 +228,108 @@ class Map extends Component {
         }
     };
     
-
+    const loader = new THREE.FontLoader();
+    const fontMaterials = [
+        new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } ), // front
+        new THREE.MeshPhongMaterial( { color: 0xffffff } ) // side
+    ];
 
     // Create and add coordinates for the globe
     function addCountryCoord(earth, country, language, latitude, longitude, color, region, population, area_sq_mi, gdp_per_capita, climate,cases){
         let populationRate = population/50000000
-        let pointOfInterest ;
+        let newBarGeometry ;
+        let newTextGeometry
         let casesRate = cases/500000
         if (casesRate > 3) {
-            pointOfInterest = new THREE.BoxGeometry(.5, casesRate/4, .5)
+            newBarGeometry = new THREE.BoxGeometry(.5, casesRate/4, .5)
+            newBarGeometry.rotateY(Math.PI/2)
         }else{
-            pointOfInterest = new THREE.BoxGeometry(.1, casesRate, .1)
+            newBarGeometry = new THREE.BoxGeometry(.1, casesRate, .1)
+            newBarGeometry.rotateY(Math.PI/2)
         }
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+        canvas.width = 300
+        canvas.height = 300
+        
+        ctx.fillStyle = color
+        ctx.fillRect(0,0,300,300)
+
+        ctx.fillStyle = "#000"
+        ctx.font = 'normal 28pt Arial'
+        ctx.fillText('-' ,10,20)
+        let textWord = 'Confirmed cases:       '
+        let len = parseInt(textWord.length/10)
+        for ( let i =0; i< (len+1);i++){
+            let space = 10
+            if ( i === len){
+                space = textWord.length - len*10
+            }
+            let word = textWord.substr(i*10,space)
+            ctx.fillText(word,15,60*(i+1))
+        }
+        ctx.fillStyle = "#000"
+        ctx.font = 'normal 48pt Arial bold'
+        // ctx.fillText('        '+cases, 30,60)
+        let casesText = '                    '+cases;
+        let caseLen = parseInt(casesText.length/10)
+        for ( let i =0; i< (caseLen+1);i++){
+            let space = 7
+            if ( i === caseLen){
+                space = casesText.length- caseLen*10
+            }
+            let word = casesText.substr(i*10,space)
+            ctx.fillText(word,10,60*(i+1))
+        }
+        ctx.rotate( -Math.PI / 2 );
+        
+        let url = canvas.toDataURL('image/png')
+
+        let TextGeometry = new THREE.PlaneGeometry(0.3,0.3)
+        let textTexure = THREE.ImageUtils.loadTexture(url,null,function(t) {})
+         
+
+        let textMaterial = [
+            new THREE.MeshBasicMaterial({
+                color:color
+            }),
+            new THREE.MeshBasicMaterial({
+                color:color
+            }),
+            new THREE.MeshBasicMaterial({
+                map:textTexure,
+                side:THREE.DoubleSide,
+                opacity:1,
+                transparent:true
+            }),
+            new THREE.MeshBasicMaterial({
+                color:color
+            }),
+            new THREE.MeshBasicMaterial({
+                color:color
+            }),
+            new THREE.MeshBasicMaterial({
+                color:color
+            }),
+        ]
+  
+        loader.load( './helvetiker_regular.typeface.json', function ( font ) {
+
+            newTextGeometry = new THREE.TextGeometry( cases.toString(), {
+                font: font,
+                size: 100,
+                height: cases,
+                curveSegments: 12,
+                bevelEnabled: true,
+                bevelThickness: 10,
+                bevelSize: 8,
+                bevelOffset: 0,
+                bevelSegments: 5
+            } );
+        } );
+
+        let textMesh1 = new THREE.Mesh( newTextGeometry,fontMaterials );
+
         let lat = latitude * (Math.PI/180);
         let lon = -longitude * (Math.PI/180);
         console.log('add coord');
@@ -251,16 +342,21 @@ class Map extends Component {
         });
     
         let mesh = new THREE.Mesh(
-            pointOfInterest,
-            material
+            newBarGeometry,
+            textMaterial
         );
-    
+         textMesh1.position.set(
+            Math.cos(lat) * Math.cos(lon) * radius,
+            Math.sin(lat) * radius,
+            Math.cos(lat) * Math.sin(lon) * radius + 10
+        );
+        
         mesh.position.set(
             Math.cos(lat) * Math.cos(lon) * radius,
             Math.sin(lat) * radius,
             Math.cos(lat) * Math.sin(lon) * radius
         );
-    
+        textMesh1.rotation.set(0.0, -lon, lat-Math.PI*0.5);
         mesh.rotation.set(0.0, -lon, lat-Math.PI*0.5);
     
         mesh.userData.country = country;
@@ -272,14 +368,22 @@ class Map extends Component {
         mesh.userData.gdp_per_capita = gdp_per_capita;
         mesh.userData.climate = climate;
         
+        let textMesh = new THREE.Mesh(TextGeometry,textMaterial)
+        textMesh.position.set(
+            Math.cos(lat) * Math.cos(lon) * radius+0.2,
+            Math.sin(lat) * radius+0.2,
+            Math.cos(lat) * Math.sin(lon) * radius
+        );
+        textMesh.rotation.set(0.0, 90-lon, lat-Math.PI*0.5);
+        // earthClouds.add(textMesh)
+
         earthClouds.add(mesh)
+        earthClouds.add(textMesh1)
+        
     
     };
     
-    // Variables to get information and change accordingly
-    // let countryInfo = document.getElementById("country");
-    // countryInfo.addEventListener("click", changeToCountry);
-    
+
     // Changes the information so data points can be seen
     function changeToCountry() {
         // Show/hide needed and unneeded elements
@@ -320,7 +424,9 @@ class Map extends Component {
   }
   render() {
     return (
-      <div />
+      <div>
+      <canvas id='canvas' style={{display:'none'}} > </canvas>
+      </div>
     )
   }
 }
