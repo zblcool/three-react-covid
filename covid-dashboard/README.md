@@ -185,8 +185,3 @@ Project
 
 In the future, I want to integrate the library I used in another project --- `Cesium` into the project to provide the Terrain so you can zoom into details from the outter space.
 
-Below are the Cecium examples I created.
-
-![preview](./public/record4.gif)
-
-![preview](./public/record5.gif)
